@@ -1,0 +1,7 @@
+admin
+1295ingeniero@pax
+
+user: adminrefugio
+correo: refugiomascotas980@gmail.com
+passcorreo: 1295mascota
+pass: 1295proyect0fin@l

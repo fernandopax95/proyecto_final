@@ -1,0 +1,9 @@
+{% extends 'base/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div style="text-align: center;">
+    <h2>Rostro Registrado</h2>
+    <h1>{{user}}</h1>
+    <a class="btn btn-dark" href="{% url 'mascota_listar_imagenes'%}">Ver Mascotas</a>
+</div>
+{% endblock %}

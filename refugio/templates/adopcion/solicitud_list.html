@@ -1,0 +1,60 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+<div style="text-align: center;">
+    <h1>Listado de Solicitudes</h1>
+</div>
+
+<div style="text-align: right;">
+    <a class="btn btn-dark" href="{% url 'mascota_listar_imagenes'%}">Mascotas</a>
+	<a class="btn btn-dark" href="{% url 'solicitud_listar_pdf'%}">Generar PDF</a>
+</div>
+
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<td>No. Solicitud</td>
+			<td>Adoptante</td>
+			<td>No. Mascotas</td>
+			<td>Razones</td>
+			{% if user.is_authenticated %}
+			<td>Acciones</td>
+			{%endif %}
+		</tr>
+		
+	</thead>
+	<tbody>
+		{% if object_list %}
+		{% for solicitud in object_list %}
+		<tr>
+			<td>{{ solicitud.id }}</td>
+			<td>{{ solicitud.persona.nombre }} {{solicitud.persona.apellidos}}</td>
+			<td>{{ solicitud.numero_mascotas }}</td>
+			<td>{{ solicitud.razones }}</td>
+			{% if user.is_authenticated %}
+			<td>
+				<a class="btn btn-dark" href="{% url 'solicitud_editar' solicitud.id%}">Editar</a>
+				<a class="btn btn-danger" href="{% url 'solicitud_eliminar' solicitud.id%}">Eliminar</a>
+			</td>
+			{%endif %}
+		</tr>
+		{% endfor %}
+		
+		{% else %}
+		<h1>No hay registros de solicitudes</h1>
+		{% endif %}
+	</tbody>
+</table> 
+<ul class="pager" style="text-align: center;">
+	<li>
+		{% if page_obj.has_previous %}
+       	 <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+		{% endif %}
+      
+		{% if page_obj.has_next %}
+     	 <a href="?page={{ page_obj.next_page_number }}">Next</a> 
+    	{% endif %}
+    </li>
+</ul>
+
+{% endblock%}

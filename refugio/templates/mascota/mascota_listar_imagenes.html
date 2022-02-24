@@ -1,0 +1,49 @@
+{% extends 'base/base.html' %}
+
+
+{% block content %}
+<div style="text-align: center;">
+    <h1>Fotos  de Mascotas</h1>
+    
+</div>
+<div style="text-align: right;">
+    <a class="btn btn-dark" href="{% url 'mascota_listar'%}">Listado de Mascotas</a>
+</div>
+<style type="text/css"> 
+	.transformacion1 { text-transform: capitalize;}   
+	.transformacion2 { text-transform: uppercase;}   
+	.transformacion3 { text-transform: lowercase;}   
+</style> 
+
+  
+
+
+    <div class="row">
+        <div class="col-9">
+            <div class="row">
+                {% if object_list %}
+		        {% for mascota in object_list%}
+                    <div class="col-md-3 col-sm-12 col-lg-4">
+                        <div class="card" style="width: 100%">
+                            <img src="{{ mascota.imagen.url }}" style="width:100%;" class="card-img-top"  />
+                            <div class="card-body">
+                                <h5 class="card-title; transformacion2"> {{ mascota.nombre }}</h5>
+                                <p class="card-text; transformacion1">Sexo: {{ mascota.sexo }}</p>
+                                {%if mascota.persona.apellidos == "Disponible" %}
+                                <p class="card-text; transformacion1">Estado: {{ mascota.persona.apellidos}}</p>
+                                {% else %}
+                                <p class="card-text; transformacion1">Adoptante: {{ mascota.persona.nombre}} {{ mascota.persona.apellidos}}</p>
+                               
+                                {% endif %}
+                            </div>
+                            
+                        </div>
+                    </div>
+                {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+
+        
+    </div>
+{% endblock %}

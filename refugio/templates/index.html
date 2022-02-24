@@ -1,0 +1,54 @@
+{% extends 'base/base.html' %}
+
+{% block title %}
+Refugio de Mascotas
+{% endblock %}
+{% block navbar%}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	<div class="container-fluid">
+	  <a class="navbar-brand" href="{% url 'inicio' %}">Refugio de Mascotas</a>
+	  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	  </button>
+	  <div class="collapse navbar-collapse" id="navbarColor01">
+		<ul class="navbar-nav me-auto">
+			<li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Mascotas</a>
+                <div class="dropdown-menu">
+                  
+                  
+                  <a class="dropdown-item" href="{% url 'mascota_listar' %}">Listado de mascotas</a>
+                  <a class="dropdown-item" href="{% url 'mascota_listar_imagenes' %}">Fotos de mascotas</a>
+                </div>
+              </li>
+			<li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Adopciones</a>
+                <div class="dropdown-menu">
+                  <a class="dropdown-item" href="{% url 'solicitud_crear' %}">Solicitar</a>
+                  <a class="dropdown-item" href="{% url 'solicitud_listar' %}">Ver solicitudes</a>
+                </div>
+              </li>
+			  <li class="nav-item">
+				<a class="nav-link" href="{% url 'inicio' %}">Acceder</a>
+			  </li>
+			  <li class="nav-item">
+				<a class="nav-link" href="{% url 'registrar_usuario' %}">Registrar usuario</a>
+			  </li>
+		  
+		</ul>
+		
+	  </div>
+	</div>
+  </nav>
+
+{% endblock %}
+
+{% block content %}
+<div style="text-align: center;">
+    <h2>Bienvenido</h2>
+	
+	<h2>Para iniciar sesión debe validar su rostro</h2>
+    <a class="btn btn-secondary" href="{% url 'validar_rostro' %}">Validar Rostro</a>
+	
+</div>
+{% endblock %}

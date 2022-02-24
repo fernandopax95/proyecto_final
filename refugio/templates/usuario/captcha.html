@@ -1,0 +1,22 @@
+{% extends 'base/base.html' %}
+
+{% block title %}
+Refugio de Mascotas
+{% endblock %}
+{% block navbar%}
+
+{% endblock %}
+
+
+{% block content %}
+<form action="" method="post">
+    {% csrf_token %}
+
+    {{ form.captcha.errors }}
+    {{ form.captcha }}
+
+    <div class="form-actions">
+        <input type="submit" value="Submit" />
+    </div>
+</form>
+{% endblock %}

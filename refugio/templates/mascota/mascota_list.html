@@ -1,0 +1,110 @@
+{% extends 'base/base.html' %}
+
+
+
+{% block content %}
+<div style="text-align: center;">
+    <h1>Listado de Mascotas</h1>
+</div>
+
+    
+<div style="text-align: right;">
+	<a class="btn btn-dark" href="{% url 'solicitud_listar'%}">Listado de Solicitudes</a>
+
+    <a class="btn btn-dark" href="{% url 'mascota_listar_imagenes'%}">Catalogo de fotos</a>
+	<a class="btn btn-dark" href="{% url 'mascota_listar_pdf'%}">Generar PDF</a>
+</div>
+
+
+	
+</p>
+<style type="text/css"> 
+	.transformacion1 { text-transform: capitalize;}   
+	.transformacion2 { text-transform: uppercase;}   
+	.transformacion3 { text-transform: lowercase;}   
+	</style> 
+
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<td># de ID</td>
+			<td>Nombre</td>
+			<td>Sexo</td>
+			<td>Edad</td>
+			<td>Fecha de Rescate</td>
+			<td>Vacunas</td>
+			<td>Adoptante</td>
+			{% if user.is_authenticated %}
+			<td>Acciones</td>
+			{%endif %}
+		</tr>
+		
+	</thead>
+	<tbody>
+		{% if object_list %}
+		{% for mascota in object_list%}
+		<tr>
+			<td>{{ mascota.folio }}</td>
+			<td class="transformacion2">{{ mascota.nombre }}</td>
+			<td class="transformacion1">{{ mascota.sexo }}</td>
+			<td>{{ mascota.edad_aproximada }}</td>
+			<td>{{ mascota.fecha_rescate }}</td>
+			<td>
+			<ul>{% for vacuna in mascota.vacuna.all %}
+				<li>
+					{{vacuna.nombre}}
+				</li>
+				{% endfor %}
+			</ul>
+    		</td>
+			{%if mascota.persona.apellidos == "Disponible" %}
+            	<td>{{ mascota.persona.apellidos}}</td>
+            {% else %}
+				<td>{{ mascota.persona.nombre }} {{ mascota.persona.apellidos }}</td>
+                               
+            {% endif %}
+
+
+			
+			{% if user.is_authenticated %}
+			<td>
+				<a class="btn btn-dark" href="{% url 'mascota_editar' mascota.folio%}">Editar</a>
+				<a class="btn btn-danger" href="{% url 'mascota_eliminar' mascota.folio%}">Eliminar</a>
+			</td>
+			{%endif %}
+			
+		</tr>
+
+
+
+
+		{% endfor %}
+		
+		{% else %}
+		<h1>No hay registros de mascotas</h1>
+		{% endif %}
+
+
+
+	</tbody>
+
+
+
+
+
+</table> 
+<ul class="pager">
+	<li>
+		{% if page_obj.has_previous %}
+       	 <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+		{% endif %}
+      
+		{% if page_obj.has_next %}
+     	 <a href="?page={{ page_obj.next_page_number }}">Next</a> 
+    	{% endif %}
+    </li>
+</ul>
+
+
+
+{% endblock%}

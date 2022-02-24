@@ -1,0 +1,41 @@
+{% extends 'base/base.html' %}
+
+{% block navbar%}
+
+{% endblock %}
+
+{% block content %}
+<div style="text-align: center;">
+    <h1>Listado de Solicitudes</h1>
+    <h4>Cantidad de Solicitudes:  {{cantidad}}</h4>
+</div>
+
+
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<td>No. Solicitud</td>
+			<td>Adoptante</td>
+			<td>No. Mascotas</td>
+			<td>Razones</td>
+			
+		</tr>
+		
+	</thead>
+	<tbody>
+		
+		    {% for solicitud in solicituds %}
+		    <tr>
+			    <td>{{ solicitud.id }}</td>
+			    <td>{{ solicitud.persona.nombre }} {{solicitud.persona.apellidos}}</td>
+			    <td>{{ solicitud.numero_mascotas }}</td>
+			    <td>{{ solicitud.razones }}</td>
+			
+		    </tr>
+		    {% endfor %}
+		
+		
+	</tbody>
+</table> 
+
+{% endblock%}
